@@ -1,0 +1,276 @@
+-- ts file was generated at discord.gg/25ms
+
+
+local v1 = game:GetService("Players")
+local v2 = game:GetService("ReplicatedStorage")
+local v3 = game:GetService("Workspace")
+local vu4 = game:GetService("TweenService")
+local vu5 = v1.LocalPlayer
+local vu6 = v2:WaitForChild("DamageEvent")
+local vu7 = v2:WaitForChild("CutLimbsEvent")
+local vu8 = v3.Entities.Titans
+local vu9 = v3.Entities.Humanoids
+local function vu18(p10)
+    local v11 = vu5.Character
+    if v11 then
+        v11 = vu5.Character:FindFirstChild("HumanoidRootPart")
+    end
+    if not (v11 and p10) then
+        return false
+    end
+    local v12 = vu8
+    local v13, v14, v15 = ipairs(v12:GetChildren())
+    local v16 = 200
+    while true do
+        local v17
+        v15, v17 = v13(v14, v15)
+        if v15 == nil then
+            break
+        end
+        if string.lower(v17.Name):find("colossal") then
+            v16 = 9000000000
+            break
+        end
+    end
+    return (p10.Position - v11.Position).Magnitude <= v16
+end
+local v19 = vu8
+local v20, v21, v22 = ipairs(vu8.GetChildren(v19))
+local vu23 = vu8
+local vu24 = vu5
+local vu25 = true
+local vu26 = true
+local vu27 = true
+local vu28 = 2
+local vu29 = true
+local vu30 = "&@&*&@&"
+while true do
+    local v31
+    v22, v31 = v20(v21, v22)
+    if v22 == nil then
+        break
+    end
+    if string.lower(v31.Name):find("female") then
+        vu28 = 5
+        break
+    end
+end
+local function vu35(p32)
+    local v33 = vu24.Character
+    if v33 then
+        v33 = vu24.Character:FindFirstChild("HumanoidRootPart")
+    end
+    if v33 then
+        local v34 = vu4:Create(v33, TweenInfo.new(vu28), {
+            CFrame = p32
+        })
+        v34:Play()
+        v34.Completed:Wait()
+    end
+end
+local function vu47(p36)
+    local v37 = vu24.Character
+    if v37 then
+        v37 = vu24.Character:FindFirstChild("HumanoidRootPart")
+    end
+    local v38 = math.huge
+    local v39, v40, v41 = pairs(p36:GetChildren())
+    local v42 = nil
+    while true do
+        local v43
+        v41, v43 = v39(v40, v41)
+        if v41 == nil then
+            break
+        end
+        local v44 = v43:FindFirstChildOfClass("Humanoid")
+        local v45 = v43.PrimaryPart or v43:FindFirstChildWhichIsA("BasePart")
+        if v44 and (v44.Health > 0 and (v45 and not v45.Anchored)) then
+            local v46 = (v37.Position - v45.Position).Magnitude
+            if v46 < v38 then
+                v38 = v46
+                v42 = {
+                    model = v43,
+                    humanoid = v44,
+                    part = v45
+                }
+            end
+        end
+    end
+    return v42
+end
+task.spawn(function()
+    while task.wait(0.1) do
+        if vu29 then
+            local v48 = vu23
+            local v49, v50, v51 = ipairs(v48:GetChildren())
+            while true do
+                local v52
+                v51, v52 = v49(v50, v51)
+                if v51 == nil then
+                    break
+                end
+                local v53 = v52:FindFirstChild("Humanoid")
+                local v54 = v52:FindFirstChild("NapeHitbox")
+                if v53 and (v54 and (v53.Health > 0 and vu18(v54))) then
+                    vu6:FireServer(nil, v53, vu30, v52)
+                end
+            end
+            local v55 = vu9
+            local v56, v57, v58 = ipairs(v55:GetChildren())
+            while true do
+                local v59
+                v58, v59 = v56(v57, v58)
+                if v58 == nil then
+                    break
+                end
+                local v60 = v59:FindFirstChild("Humanoid")
+                if v60 and v60.Health > 0 then
+                    vu6:FireServer(nil, v60, vu30, v59)
+                end
+            end
+        end
+    end
+end)
+task.spawn(function()
+    while task.wait(0.1) do
+        if vu25 then
+            local v61 = vu23
+            local v62, v63, v64 = ipairs(v61:GetChildren())
+            while true do
+                local v65
+                v64, v65 = v62(v63, v64)
+                if v64 == nil then
+                    break
+                end
+                local v66 = v65:FindFirstChild("Humanoid")
+                local v67 = v65:FindFirstChild("NapeHitbox")
+                if v66 and (v66.Health > 0 and (v67 and vu18(v67))) then
+                    vu7:FireServer("Left Arm", v65, vu30)
+                    vu7:FireServer("Right Arm", v65, vu30, "Right Shoulder")
+                    vu7:FireServer("Left Arm", v65, vu30, "Left Shoulder")
+                    vu6:FireServer("Blind", v66, vu30, v65)
+                end
+            end
+        end
+    end
+end)
+task.spawn(function()
+    while task.wait(0.1) do
+        local v68 = vu26 and vu47(vu23)
+        if v68 then
+            local v69 = vu24.Character
+            if v69 then
+                v69 = vu24.Character:FindFirstChild("HumanoidRootPart")
+            end
+            if v69 then
+                local v70 = v68.distance or 0
+                local v71 = 0 <= v70 and v70 <= 1000 and 2 or (v70 > 1000 and 7 or 3)
+                local v72 = vu4:Create(v69, TweenInfo.new(v71), {
+                    CFrame = v68.part.CFrame + Vector3.new(0, 2, 0)
+                })
+                v72:Play()
+                v72.Completed:Wait()
+                for _ = 1, 50 do
+                    vu6:FireServer(nil, v68.humanoid, vu30, v68.model)
+                end
+            end
+        end
+    end
+end)
+task.spawn(function()
+    while task.wait(0.1) do
+        local v73 = vu27 and vu47(vu9)
+        if v73 then
+            vu35(v73.part.CFrame + Vector3.new(0, 2, 0))
+            for _ = 1, 50 do
+                vu6:FireServer(nil, v73.humanoid, vu30, v73.model)
+            end
+        end
+    end
+end)
+local v74 = game:GetService("Players")
+local v75 = game:GetService("RunService")
+local vu76 = game:GetService("Workspace")
+local vu77 = v74.LocalPlayer
+local v78 = vu76
+local vu79 = vu76.WaitForChild(v78, "Entities"):WaitForChild("Titans")
+local vu80 = {}
+local vu81 = true
+local vu82 = 10000
+local vu83 = {
+    Colossal = Color3.fromRGB(255, 0, 0),
+    Armored = Color3.fromRGB(100, 100, 100),
+    Female = Color3.fromRGB(85, 170, 255),
+    Beast = Color3.fromRGB(139, 69, 19),
+    WarHammer = Color3.fromRGB(240, 240, 240),
+    Jaw = Color3.fromRGB(255, 255, 0),
+    Cart = Color3.fromRGB(170, 85, 255),
+    Default = Color3.fromRGB(0, 255, 0)
+}
+local function vu85(p84)
+    if vu80[p84] then
+        vu80[p84]:Destroy()
+        vu80[p84] = nil
+    end
+end
+local function vu88(p86)
+    local v87 = Instance.new("Highlight")
+    v87.Name = "TitanESP"
+    v87.Adornee = p86
+    v87.FillTransparency = 0.75
+    v87.OutlineTransparency = 0
+    v87.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    v87.FillColor = vu83[p86.Name] or vu83.Default
+    v87.OutlineColor = Color3.new(1, 1, 1)
+    v87.Parent = p86
+    vu80[p86] = v87
+end
+v75.RenderStepped:Connect(function()
+    if vu81 then
+        local v89 = vu77.Character
+        if v89 then
+            v89 = vu77.Character:FindFirstChild("HumanoidRootPart")
+        end
+        if v89 then
+            local v90 = vu79
+            local v91, v92, v93 = pairs(v90:GetChildren())
+            while true do
+                local v94
+                v93, v94 = v91(v92, v93)
+                if v93 == nil then
+                    break
+                end
+                local v95 = v94:FindFirstChild("HumanoidRootPart")
+                if v95 then
+                    if (v89.Position - v95.Position).Magnitude > vu82 then
+                        vu85(v94)
+                    elseif not vu80[v94] then
+                        vu88(v94)
+                    end
+                end
+            end
+            local v96, v97, v98 = pairs(vu80)
+            while true do
+                local v99
+                v98, v99 = v96(v97, v98)
+                if v98 == nil then
+                    break
+                end
+                if not v98:IsDescendantOf(vu76) then
+                    vu85(v98)
+                end
+            end
+        end
+    else
+        local v100, v101, v102 = pairs(vu80)
+        while true do
+            local v103
+            v102, v103 = v100(v101, v102)
+            if v102 == nil then
+                break
+            end
+            vu85(v102)
+        end
+        return
+    end
+end)
